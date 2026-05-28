@@ -1,3 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+DOTFILES_GIT="https://github.com/Zarkibar/dotfiles.git"
+YAY_GIT="https://aur.archlinux.org/yay.git"
+
+sudo -v || exit 1
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
+
 msg() {
     printf "\n==> %s\n" "$1"
 }

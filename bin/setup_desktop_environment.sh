@@ -1,3 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+
+sudo -v || exit 1
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
+
+
 msg() {
     printf "\n==> %s\n" "$1"
 }
