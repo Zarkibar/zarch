@@ -20,6 +20,7 @@ setup_hyprland() {
     yay -S --noconfirm --needed wleave clipse
 
     stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar wofi starship wleave
+    stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
 
     if grep "starship init bash" ~/.bashrc; then
       echo "starship already in ~/.bashrc"
@@ -40,12 +41,5 @@ setup_nvim() {
     stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
 }
 
-setup_zarch() {
-  msg "Setting up zarch"
-
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
-}
-
 setup_hyprland
 setup_nvim
-setup_zarch

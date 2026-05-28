@@ -21,3 +21,5 @@ install_personalized_packages() {
     flatpak install --system -y flathub org.processing.processingide
     flatpak install --system -y flathub org.keepassxc.KeePassXC
 }
+
+install_personalized_packages

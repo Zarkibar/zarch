@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 sudo -v || exit 1
 while true; do
     sudo -n true
@@ -9,10 +11,10 @@ while true; do
 done 2>/dev/null &
 
 all() {
-  sh bin/update_mirrors.sh
-  sh bin/install_base.sh
-  sh bin/setup_desktop_environment.sh
-  sh bin/personalized_packages.sh
+  sh "$SCRIPT_DIR/bin/update_mirrors.sh"
+  sh "$SCRIPT_DIR/bin/install_base.sh"
+  sh "$SCRIPT_DIR/bin/setup_desktop_environment.sh"
+  sh "$SCRIPT_DIR/bin/personalized_packages.sh"
     # SDDM theming - NOT TOUCHED
 }
 
