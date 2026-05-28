@@ -15,10 +15,10 @@ while true; do
 done 2>/dev/null &
 
 all() {
-  ./bin/update_mirrors.sh
-  ./bin/install_base.sh
-  ./bin/setup_desktop_environment.sh
-  ./bin/personalized_packages.sh
+  sudo ./bin/update_mirrors.sh
+  sudo ./bin/install_base.sh
+  sudo ./bin/setup_desktop_environment.sh
+  sudo ./bin/personalized_packages.sh
     # SDDM theming - NOT TOUCHED
 }
 
