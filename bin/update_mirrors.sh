@@ -1,3 +1,5 @@
+GHOSTMIRROR_GIT="https://aur.archlinux.org/ghostmirror.git"
+
 msg() {
     printf "\n==> %s\n" "$1"
 }
