@@ -11,7 +11,7 @@ while true; do
 done 2>/dev/null &
 
 sudo pacman -S --needed --noconfirm gum
-windowManager=$(gum choose Hyprland Sway i3)
+windowManager=$(gum choose Hyprland i3)
 
 all() {
   sh "$SCRIPT_DIR/bin/update_mirrors.sh"
