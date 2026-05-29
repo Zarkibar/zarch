@@ -55,7 +55,7 @@ setup_i3() {
   # sudo pacman -S polybar
 
   sudo pacman -S --needed --noconfirm i3-wm i3status rofi dunst flameshot feh i3lock polybar
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" i3 i3status dunst polybar rofi
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds i3 i3status dunst polybar rofi
 }
 
 setup_nvim() {
