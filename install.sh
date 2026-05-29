@@ -10,10 +10,13 @@ while true; do
     kill -0 "$$" || exit
 done 2>/dev/null &
 
+sudo pacman -S --needed --noconfirm gum
+windowManager=$(gum choose Hyprland Sway i3)
+
 all() {
   sh "$SCRIPT_DIR/bin/update_mirrors.sh"
   sh "$SCRIPT_DIR/bin/install_base.sh"
-  sh "$SCRIPT_DIR/bin/setup_desktop_environment.sh"
+  sh "$SCRIPT_DIR/bin/setup_desktop_environment.sh" "$windowManager"
   sh "$SCRIPT_DIR/bin/personalized_packages.sh"
     # SDDM theming - NOT TOUCHED
 }

@@ -14,23 +14,48 @@ msg() {
 }
 
 setup_hyprland() {
-    msg "Setting up hyprland ecosystem"
+  msg "Setting up hyprland ecosystem"
 
-    sudo pacman -S --needed --noconfirm hyprland wofi waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship
-    yay -S --noconfirm --needed wleave clipse
+  sudo pacman -S --needed --noconfirm hyprland wofi waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship
+  yay -S --noconfirm --needed wleave clipse
 
-    stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar wofi starship wleave
-    stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar wofi starship wleave
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
 
-    if grep "starship init bash" ~/.bashrc; then
-      echo "starship already in ~/.bashrc"
-    else
-        echo 'eval "$(starship init bash)"' >> ~/.bashrc
-    fi
+  if grep "starship init bash" ~/.bashrc; then
+    echo "starship already in ~/.bashrc"
+  else
+    echo 'eval "$(starship init bash)"' >> ~/.bashrc
+  fi
 
-    # GTK
-    sudo pacman -S --needed --noconfirm nwg-look
-    yay -S --needed --noconfirm colloid-gtk-theme
+  # GTK
+  sudo pacman -S --needed --noconfirm nwg-look
+  yay -S --needed --noconfirm colloid-gtk-theme
+}
+
+setup_sway() {
+  msg "Setting up Sway ecosystem"
+
+  # sudo pacman -S --needed --noconfirm sway wofi waybar kitty nemo hyprshot swaync
+  # sway (foot or kitty) wofi waybar swaylock swayidle mako grim slurp wl-clipboard
+  # yazi fzf zoxide eza gum
+}
+
+setup_i3() {
+  msg "Setting up i3 desktop environment"
+
+  # hyprland -> i3, waybar -> polybar OR i3bar, wofi -> rofi, hyprlock -> i3lock-color
+  # hypridle -> xautolock, swaync -> dunst, hyprpaper -> feh OR nitrogen, hyprshot -> flameshot
+  # clipse -> greenclip, wl-clipboard -> xclip, wleave -> rofi power menu
+  
+  # sudo pacman -S i3-wm i3status rofi dunst picom feh \
+  # kitty nemo flameshot xclip playerctl brightnessctl \
+  # network-manager-applet polkit-gnome
+  # yay -S i3lock-color greenclip
+  # sudo pacman -S polybar
+
+  sudo pacman -S --needed --noconfirm i3-wm i3status rofi dunst flameshot feh i3lock polybar
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" i3 i3status dunst polybar rofi
 }
 
 setup_nvim() {
@@ -41,5 +66,13 @@ setup_nvim() {
     stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
 }
 
-setup_hyprland
-setup_nvim
+
+if [ "$1" = "Hyprland" ]; then
+  echo "setup_hyprland"
+elif [ "$1" = "Sway" ]; then
+  echo "setup_sway"
+else
+  echo "setup_i3"
+fi
+
+#setup_nvim
