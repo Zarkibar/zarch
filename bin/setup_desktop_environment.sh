@@ -68,11 +68,11 @@ setup_nvim() {
 
 
 if [ "$1" = "Hyprland" ]; then
-  echo "setup_hyprland"
+  setup_hyprland
 elif [ "$1" = "Sway" ]; then
-  echo "setup_sway"
+  setup_sway
 else
-  echo "setup_i3"
+  setup_i3
 fi
 
-#setup_nvim
+setup_nvim
