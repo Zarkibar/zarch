@@ -16,10 +16,10 @@ msg() {
 setup_hyprland() {
   msg "Setting up hyprland ecosystem"
 
-  sudo pacman -S --needed --noconfirm hyprland wofi waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship
+  sudo pacman -S --needed --noconfirm hyprland rofi waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship
   yay -S --noconfirm --needed wleave clipse
 
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar wofi starship wleave
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar rofi starship wleave
   stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
 
   if grep "starship init bash" ~/.bashrc; then
@@ -55,7 +55,7 @@ setup_i3() {
   # sudo pacman -S polybar
 
   sudo pacman -S --needed --noconfirm i3-wm i3status rofi dunst flameshot feh i3lock polybar
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds i3 i3status dunst polybar rofi
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds kitty i3 i3status dunst polybar rofi
 }
 
 setup_nvim() {
@@ -69,10 +69,9 @@ setup_nvim() {
 
 if [ "$1" = "Hyprland" ]; then
   setup_hyprland
-elif [ "$1" = "Sway" ]; then
-  setup_sway
 else
-  setup_i3
+  setup_sway
 fi
 
+setup_i3
 setup_nvim

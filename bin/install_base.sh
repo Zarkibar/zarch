@@ -25,7 +25,7 @@ install_base() {
   mkdir -p Books Documents Downloads Music Projects Videos/Recording Pictures/Screenshots
 
   msg "Installing base packages"
-  sudo pacman -S --needed --noconfirm git stow neovim base-devel wget curl man pavucontrol wf-recorder ghostty
+  sudo pacman -S --needed --noconfirm git stow neovim base-devel wget curl man pavucontrol wf-recorder fzf
   sudo pacman -S --needed --noconfirm pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber helvum
   sudo pacman -S --needed --noconfirm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-desktop-portal
 
