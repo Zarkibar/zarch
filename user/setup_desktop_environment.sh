@@ -30,6 +30,9 @@ install_dotfiles() {
 setup_hyprland() {
   msg "Setting up hyprland ecosystem"
 
+  systemctl --user enable xdg-desktop-portal-hyprland.service
+  systemctl --user enable xdg-desktop-portal.service
+
   stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar rofi starship wleave
   stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
 

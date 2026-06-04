@@ -22,8 +22,6 @@ setup_hyprland() {
   yay -S --noconfirm --needed wleave clipse
  
   sudo pacman -S --needed --noconfirm xdg-desktop-portal-hyprland
-  systemctl --system enable xdg-desktop-portal-hyprland.service
-  systemctl --system enable xdg-desktop-portal.service
 
   # GTK
   sudo pacman -S --needed --noconfirm nwg-look
@@ -52,6 +50,11 @@ setup_i3() {
   # sudo pacman -S polybar
 
   sudo pacman -S --needed --noconfirm i3-wm i3status rofi dunst flameshot feh i3lock polybar
+}
+
+setup_sddm() {
+  sudo pacman -S --needed --noconfirm sddm
+  sudo systemctl enable sddm.service
 }
 
 setup_nvim() {
