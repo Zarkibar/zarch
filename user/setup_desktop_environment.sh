@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+DOTFILES_GIT="https://github.com/Zarkibar/dotfiles.git"
+
 sudo -v || exit 1
 while true; do
     sudo -n true
@@ -8,16 +10,25 @@ while true; do
     kill -0 "$$" || exit
 done 2>/dev/null &
 
+sudo pacman -S --needed --noconfirm gum
+windowManager=$(gum choose Hyprland Sway)
 
 msg() {
     printf "\n==> %s\n" "$1"
 }
 
+install_dotfiles() {
+  msg "Installing dotfiles"
+
+  if [ ! -d "$HOME/dotfiles" ]; then
+	  git clone "$DOTFILES_GIT" "$HOME/dotfiles"
+  else
+	  echo "$HOME/dotfiles already exists."
+  fi   
+}
+
 setup_hyprland() {
   msg "Setting up hyprland ecosystem"
-
-  sudo pacman -S --needed --noconfirm hyprland rofi waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship
-  yay -S --noconfirm --needed wleave clipse
 
   stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar rofi starship wleave
   stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
@@ -27,10 +38,6 @@ setup_hyprland() {
   else
     echo 'eval "$(starship init bash)"' >> ~/.bashrc
   fi
-
-  # GTK
-  sudo pacman -S --needed --noconfirm nwg-look
-  yay -S --needed --noconfirm colloid-gtk-theme
 }
 
 setup_sway() {
@@ -54,20 +61,18 @@ setup_i3() {
   # yay -S i3lock-color greenclip
   # sudo pacman -S polybar
 
-  sudo pacman -S --needed --noconfirm i3-wm i3status rofi dunst flameshot feh i3lock polybar
   stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds kitty i3 i3status dunst polybar rofi
 }
 
 setup_nvim() {
-    msg "Configuring neovim and it's plugins"
-
-    sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim tree-sitter-cli npm
-
-    stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
+  msg "Configuring neovim and it's plugins"
+  
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
 }
 
+install_dotfiles
 
-if [ "$1" = "Hyprland" ]; then
+if [ "$windowManager" = "Hyprland" ]; then
   setup_hyprland
 else
   setup_sway
