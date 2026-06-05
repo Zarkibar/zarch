@@ -25,7 +25,7 @@ git clone https://github.com/Zarkibar/zarch.git
 
 ``` 
 
-Now go to the `zarch/` directory with ```cd zarch```. Now There are 2 files `install-system.sh` and `install-user.sh`. `install-syste.sh` should be run once. It will install the necessary tools and packages into the whole system. `install-user.sh` is for each user using the system. Run `install-system.sh` first and then `install-user.sh`. If you have multiple users in your system then `install-user.sh` has to be run on each of them once to setup all the dotfiles.
+Now go to the `zarch/` directory with ```cd zarch```. Now There are 2 files `install-system.sh` and `install-user.sh`. `install-system.sh` should be run once. It will install the necessary tools and packages into the whole system. `install-user.sh` is for each user using the system. Run `install-system.sh` first and then `install-user.sh`. If you have multiple users in your system then `install-user.sh` has to be run on each of them once to setup all the dotfiles.
 
 ```bash
 ./install-system.sh
