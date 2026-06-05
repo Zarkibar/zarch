@@ -32,3 +32,36 @@ Now go to the `zarch/` directory with ```cd zarch```. Now There are 2 files `ins
 ./install-user.sh
 
 ```
+
+# Usage
+These are the necessary keybaord shortcuts
+
+| Shortcut | Action |
+|----------|----------|
+| Super + Enter | Open terminal |
+| Super + D | Open launcher |
+| Super + Q | Close window |
+| Super + E | File Manager |
+| Super + Space | Quick menu |
+| Super + M | Power menu |
+| Super + Shift + S | Screenshot |
+| Super + Shift + L | Lock screen |
+| Super + V | Clipboard paste |
+| Super + TAB | Window Selector |
+| Super + Arrow Keys | Switch between windows |
+| Super + 1,2,3,...10 | Switch between workspaces |
+| Super + Shift + 1,2,3,...10 | Move Active window to workspace |
+
+Some more shortcuts for ease
+
+| Shortcut | Action |
+|----------|----------|
+| Super + Shift + V | Toggle Floating |
+| PRINT | Screenshot whole screen |
+| Shift + PRINT | Screenshot a window |
+| Super + Shift + S | Screenshot a region |
+| Super + Mouse Wheel | Switch between workspaces |
+| Super + Left Mouse Button | Move window |
+| Super + Right Mouse Button | Resize Window (if floating) |
+
+If your keyboard supports volume control, brightness control or audio control, they should work too.
