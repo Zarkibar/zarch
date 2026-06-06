@@ -63,5 +63,7 @@ Some more shortcuts for ease
 | Super + Mouse Wheel | Switch between workspaces |
 | Super + Left Mouse Button | Move window |
 | Super + Right Mouse Button | Resize Window (if floating) |
+| Super + Shift + M | Open Music Options |
+| Super + CTRL + M | Close Music Options |
 
 If your keyboard supports volume control, brightness control or audio control, they should work too.
