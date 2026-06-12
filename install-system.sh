@@ -14,7 +14,7 @@ done 2>/dev/null &
 all() {
   sh "$SCRIPT_DIR/system/update_mirrors.sh"
   sh "$SCRIPT_DIR/system/install_base.sh"
-  sh "$SCRIPT_DIR/system/setup_desktop_environment.sh" "$windowManager"
+  sh "$SCRIPT_DIR/system/setup_desktop_environment.sh"
   sh "$SCRIPT_DIR/system/personalized_packages.sh"
   # SDDM theming - NOT TOUCHED
 }

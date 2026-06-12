@@ -51,20 +51,8 @@ setup_sway() {
   # yazi fzf zoxide eza gum
 }
 
-setup_i3() {
-  msg "Setting up i3 desktop environment"
-
-  # hyprland -> i3, waybar -> polybar OR i3bar, wofi -> rofi, hyprlock -> i3lock-color
-  # hypridle -> xautolock, swaync -> dunst, hyprpaper -> feh OR nitrogen, hyprshot -> flameshot
-  # clipse -> greenclip, wl-clipboard -> xclip, wleave -> rofi power menu
-  
-  # sudo pacman -S i3-wm i3status rofi dunst picom feh \
-  # kitty nemo flameshot xclip playerctl brightnessctl \
-  # network-manager-applet polkit-gnome
-  # yay -S i3lock-color greenclip
-  # sudo pacman -S polybar
-
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds kitty i3 i3status dunst polybar rofi
+setup_kde() {
+  # Nothing for now
 }
 
 setup_nvim() {
@@ -78,8 +66,7 @@ install_dotfiles
 if [ "$windowManager" = "Hyprland" ]; then
   setup_hyprland
 else
-  setup_sway
+  setup_kde
 fi
 
-setup_i3
 setup_nvim

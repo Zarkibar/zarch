@@ -20,23 +20,8 @@ update_system() {
 }
 
 install_base() {
-  cd
-  mkdir -p Books Documents Downloads Music Projects Videos/Recording Pictures/Screenshots
-
   msg "Installing base packages"
-  sudo pacman -S --needed --noconfirm git stow neovim base-devel wget curl man pavucontrol wf-recorder fzf
-  sudo pacman -S --needed --noconfirm pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber helvum
-  sudo pacman -S --needed --noconfirm xdg-desktop-portal-gtk xdg-desktop-portal
-  
-  # Instaling necessary fonts
-  sudo pacman -S --needed --noconfirm ttf-font-awesome ttf-jetbrains-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji
-
-  # Installing necessary GPU drivers
-  sudo pacman -S --needed --noconfirm mesa vulkan-radeon libva-mesa-driver  # AMD
-  sudo pacman -S --needed --noconfirm mesa vulkan-intel intel-media-driver  # Intel
-
-  # Music Player
-  sudo pacman -S --needed --noconfirm mpd mpc ncmpcpp
+  sudo pacman -S --needed --noconfirm - < packages.txt
 }
 
 install_yay() {

@@ -12,8 +12,8 @@ done 2>/dev/null &
 
 
 all() {
+  sh "$SCRIPT_DIR/user/base.sh"
   sh "$SCRIPT_DIR/user/setup_desktop_environment.sh"
-  # SDDM theming - NOT TOUCHED
 }
 
 all
