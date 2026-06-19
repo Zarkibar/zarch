@@ -1,19 +1,120 @@
 #!/bin/bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_GIT="https://github.com/Zarkibar/dotfiles.git"
 
-sudo -v || exit 1
-while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
-done 2>/dev/null &
+### CHECKPOINT / RESUME SYSTEM ###
 
+STATE_DIR="$HOME/.cache/zarch-install"
+STATE_FILE="$STATE_DIR/user.log"
+WM_FILE="$STATE_DIR/window_manager"
+mkdir -p "$STATE_DIR"
+touch "$STATE_FILE"
 
-all() {
-  sh "$SCRIPT_DIR/user/base.sh"
-  sh "$SCRIPT_DIR/user/setup_desktop_environment.sh"
+is_done() {
+    # usage: is_done STAGE_NAME
+    grep -qx "$1" "$STATE_FILE"
 }
 
-all
+mark_done() {
+    # usage: mark_done STAGE_NAME
+    echo "$1" >> "$STATE_FILE"
+}
+
+run_stage() {
+    # usage: run_stage STAGE_NAME function_to_run
+    local stage="$1"
+    local fn="$2"
+    if is_done "$stage"; then
+        msg "Skipping '$stage' (already completed). Delete its line from $STATE_FILE to redo."
+        return 0
+    fi
+    "$fn"
+    mark_done "$stage"
+}
+
+### CHECKPOINT / RESUME SYSTEM ###
+
+msg() {
+    printf "\n==> %s\n" "$1"
+}
+
+sudo pacman -S --needed --noconfirm gum
+
+if [ -f "$WM_FILE" ]; then
+    windowManager=$(cat "$WM_FILE")
+    msg "Using window manager from previous run: $windowManager"
+else
+    windowManager=$(gum choose Hyprland Sway)
+    echo "$windowManager" > "$WM_FILE"
+fi
+
+### BASE ###
+
+create_dirs() {
+    cd "$HOME"
+    mkdir -p Books Documents Downloads Music Projects Videos/Recording Pictures/Screenshots
+}
+
+run_stage "CREATE_DIRS" create_dirs
+
+### BASE ###
+
+### DESKTOP ENVIRONMENT ###
+
+install_dotfiles() {
+  msg "Installing dotfiles"
+  if [ ! -d "$HOME/dotfiles" ]; then
+	  git clone "$DOTFILES_GIT" "$HOME/dotfiles"
+  else
+	  echo "$HOME/dotfiles already exists."
+  fi
+}
+
+setup_hyprland() {
+  msg "Setting up hyprland ecosystem"
+
+  if systemctl --user status &>/dev/null; then
+      systemctl --user enable xdg-desktop-portal-hyprland.service || true
+      systemctl --user enable xdg-desktop-portal.service || true
+  else
+      echo "No active user D-Bus session; skipping systemctl --user enable (services will start on next graphical login)."
+  fi
+
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar rofi starship wleave
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
+
+  touch "$HOME/.bashrc"
+  if grep -q "starship init bash" "$HOME/.bashrc"; then
+    echo "starship already in ~/.bashrc"
+  else
+    echo 'eval "$(starship init bash)"' >> "$HOME/.bashrc"
+  fi
+}
+
+setup_sway() {
+  msg "Setting up Sway ecosystem"
+  # sudo pacman -S --needed --noconfirm sway wofi waybar kitty nemo hyprshot swaync
+  # sway (foot or kitty) wofi waybar swaylock swayidle mako grim slurp wl-clipboard
+  # yazi fzf zoxide eza gum
+}
+
+setup_nvim() {
+  msg "Configuring neovim and it's plugins"
+
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
+}
+
+setup_desktop_environment() {
+    if [ "$windowManager" = "Hyprland" ]; then
+        setup_hyprland
+    else
+        setup_sway
+    fi
+}
+
+run_stage "INSTALL_DOTFILES" install_dotfiles
+run_stage "SETUP_DESKTOP_ENVIRONMENT" setup_desktop_environment
+run_stage "SETUP_NVIM" setup_nvim
+
+### DESKTOP ENVIRONMENT ###
