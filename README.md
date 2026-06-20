@@ -3,7 +3,7 @@ zarch (zarkibar's arch) is just collection of bash scripts to setup and configur
 
 # Features
 It features:
-- Tiling Window Manager (Hyprland or i3)
+- Tiling Window Manager (Hyprland)
 - Waybar
 - Login Manager (sddm)
 - Lock Screen (Hyprlock)
@@ -14,7 +14,7 @@ It features:
 - Built-in screen recording
 - Beautiful terminal with Kitty and Starship
 - Custom features like Screenshot, Clipboard Manager, Power Menu, Quick Menu, Window Selector
-- Some more (fonts, themes, background selector, i3 tools etc)
+- Some more (fonts, themes, background selector etc)
 
 # Installation
 Assuming you've already installed arch linux on your system. Install git and clone this repository on your home directory. 
