@@ -96,7 +96,7 @@ update_system() {
 
 install_base() {
   msg "Installing base packages"
-  sudo pacman -S --needed --noconfirm base-devel git stow neovim base-devel wget curl man pavucontrol wf-recorder fzf playerctl jq chafa bat glow
+  sudo pacman -S --needed --noconfirm base-devel git stow neovim base-devel wget curl man pavucontrol wf-recorder fzf playerctl jq chafa bat glow htop
   sudo pacman -S --needed --noconfirm pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber helvum
   sudo pacman -S --needed --noconfirm xdg-desktop-portal-gtk xdg-desktop-portal
 
