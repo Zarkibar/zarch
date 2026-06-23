@@ -184,11 +184,12 @@ run_stage "SETUP_NVIM" setup_nvim
 
 install_personalized_packages() {
     msg "Installing personalized packages"
-    sudo pacman -S --needed --noconfirm flatpak firefox mpv foliate audacity
+    sudo pacman -S --needed --noconfirm flatpak mpv foliate audacity
 
     flatpak remote-add --system --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install --system -y flathub org.processing.processingide
     flatpak install --system -y flathub org.keepassxc.KeePassXC
+    flatpak install --system -y flathub app.zen_browser.zen
 }
 
 run_stage "INSTALL_PERSONALIZED_PACKAGES" install_personalized_packages

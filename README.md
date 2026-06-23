@@ -42,6 +42,7 @@ These are the necessary keybaord shortcuts
 | Super + D | Open launcher |
 | Super + Q | Close window |
 | Super + E | File Manager |
+| Super + B | Browser |
 | Super + Space | Quick menu |
 | Super + M | Power menu |
 | Super + Shift + S | Screenshot |
