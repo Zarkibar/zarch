@@ -198,6 +198,18 @@ run_stage "INSTALL_PERSONALIZED_PACKAGES" install_personalized_packages
 
 ### LOGIN MANAGER ###
 
+setup_sddm() {
+  sudo pacman -S --needed --noconfirm sddm
+  sudo systemctl enable sddm.service
 
+  cat > /etc/sddm.conf <<'EOF'
+  [General]
+  InputMethod=qtvirtualkeyboard
+  GreeterEnvironment=QML2_IMPORT_PATH=/usr/share/sddm/themes/silent/components/,QT_IM_MODULE=qtvirtualkeyboard
+
+  [Theme]
+  Current=silent
+  EOF
+}
 
 ### LOGIN MANAGER ###
