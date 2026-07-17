@@ -82,14 +82,7 @@ setup_hyprland() {
   fi
 
   stow --restow -t "$HOME" -d "$HOME/dotfiles" backgrounds hypridle hyprland hyprlock hyprpaper kitty waybar rofi starship wleave
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch
-
-  touch "$HOME/.bashrc"
-  if grep -q "starship init bash" "$HOME/.bashrc"; then
-    echo "starship already in ~/.bashrc"
-  else
-    echo 'eval "$(starship init bash)"' >> "$HOME/.bashrc"
-  fi
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" zarch  
 }
 
 setup_sway() {
@@ -97,12 +90,6 @@ setup_sway() {
   # sudo pacman -S --needed --noconfirm sway wofi waybar kitty nemo hyprshot swaync
   # sway (foot or kitty) wofi waybar swaylock swayidle mako grim slurp wl-clipboard
   # yazi fzf zoxide eza gum
-}
-
-setup_nvim() {
-  msg "Configuring neovim and it's plugins"
-
-  stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
 }
 
 setup_desktop_environment() {
@@ -113,8 +100,29 @@ setup_desktop_environment() {
     fi
 }
 
+setup_nvim() {
+  msg "Configuring neovim and it's plugins"
+
+  stow --restow -t "$HOME" -d "$HOME/dotfiles" nvim
+}
+
+setup_terminal() {
+  command -v fish | sudo tee -a /etc/shells
+  chsh -s "$(command -v fish)"
+
+  touch "$HOME/.config/fish/config.fish"
+  if grep -q "starship init fish" "$HOME/.config/fish/config.fish"; then
+    echo "starship already in ~/.config/fish/config.fish"
+  else
+    echo 'starship init fish | source' >> "$HOME/.config/fish/config.fish"
+  fi
+
+  echo "Setup done. Please reboot your computer..."
+}
+
 run_stage "INSTALL_DOTFILES" install_dotfiles
 run_stage "SETUP_DESKTOP_ENVIRONMENT" setup_desktop_environment
 run_stage "SETUP_NVIM" setup_nvim
+run_stage "SETUP_TERMINAL" setup_terminal
 
 ### DESKTOP ENVIRONMENT ###

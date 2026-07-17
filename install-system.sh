@@ -142,7 +142,7 @@ run_stage "INSTALL_YAY" install_yay
 setup_hyprland() {
   msg "Setting up hyprland ecosystem"
 
-  sudo pacman -S --needed --noconfirm hyprland rofi rofi-emoji waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship wl-clipboard
+  sudo pacman -S --needed --noconfirm hyprland rofi rofi-emoji waybar kitty nemo hyprshot swaync hyprlock hypridle hyprpaper starship fish wl-clipboard
   yay -S --noconfirm --needed clipse
 
   sudo pacman -S --needed --noconfirm xdg-desktop-portal-hyprland
