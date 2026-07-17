@@ -1,5 +1,5 @@
 > [!Warning]
-> This repository have been archived. Please view the newer version at https://codeberg.org/zarkibar/zarch
+> This repository has been archived. Please view the newer version at https://codeberg.org/zarkibar/zarch
 
 # Zarch
 zarch (zarkibar's arch) is just collection of bash scripts to setup and configure a freshly installed arch linux into my personal configuration. This is more of a post-installation program so you'll need to install arch first before you install this. This program basically just installs and setups a bunch of necessary tools for my convenience. It also copies the dotfiles for those tools from my other github repository.
